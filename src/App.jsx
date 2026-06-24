@@ -17,16 +17,18 @@ function App() {
     desc: "기본언어인 html, css, javascript부터 학습합니다.",
   });
   const [content, setContent] = useState([
-    { id: "1", title: "UI/UX 개발", desc: "사용자 경험을 고려한 직관적이고 반응성 높은 화면 구현" },
+    { id: "1", title: "UI/UX 개발", desc: "사용자 경험을 고려한 직관적이고 반응성 높은 화면 구현", level: "난이도 1" },
     {
       id: "2",
       title: "재사용이 가능한 UI 개발",
       desc: "컴포넌트 기반으로 동일한 UI를 효율적으로 재사용 가능",
+      level: "난이도 2",
     },
     {
       id: "3",
       title: "애니메이션 구현",
       desc: "상태 변화에 따른 자연스럽고 동적인 화면 효과 구현",
+      level: "난이도 3",
     },
   ]);
   // const [maxId, setMaxid] = useState(3);
@@ -35,6 +37,7 @@ function App() {
 
   let _title = null;
   let _desc = null;
+  let _level = null;
   let _article = null;
 
   const selectedArticle = useMemo(() => content.find(item => item.id === id), [content, id]);
@@ -51,16 +54,19 @@ function App() {
   if (mode === "welcome") {
     _title = welcome.title;
     _desc = welcome.desc;
-    _article = <MyArticle title={_title} desc={_desc} />;
+    _level = welcome.level;
+    _article = <MyArticle title={_title} desc={_desc} level={_level} />;
   } else if (mode === "read") {
     if (selectedArticle) {
       _title = selectedArticle.title;
       _desc = selectedArticle.desc;
+      _level = selectedArticle.level;
     }
     _article = (
       <MyArticle
         title={_title}
         desc={_desc}
+        level={_level}
         onChangeMode={() => {
           setMode("update");
         }}
